@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "Arkanoid";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Arkanoid</h2>
+
+<style type="text/css">
+    canvas {
+        border: 1px solid #000000;
+    }
+</style>
+
+<script type="text/javascript">
+
+$(document).ready(function () {
+
+    var barraAltura, barraLargura, jogadorPosicaoX, velocidadeJogador, bolaDiametro, bolaPosX, bolaPosY, velocidadeBola, pontosJogador, colisao;
+    barraAltura = 15;
+    barraLargura = 90;
+    velocidadeJogador = 20;
+
+    bolaDiametro = 10;
+    bolaPosX = canvas.width / 2;
+    bolaPosY = -10;
+    velocidadeBola = 10;
+
+    pontosJogador = 0;
+
+    jogadorPosicaoX = (canvas.width - barraLargura) / 2;
+
+    canvas = document.getElementById("canvas");
+    context = canvas.getContext("2d");
+
+    //Desenhando o jogador
+    context.fillRect(jogadorPosicaoX, canvas.height - barraAltura, barraLargura, barraAltura);
+
+    //Escutando o evento de pressionar teclas
+    document.addEventListener('keydown', keyDown);
+    function keyDown(e) {
+        if (e.keyCode == 37) {
+            if (jogadorPosicaoX > 0) {
+                jogadorPosicaoX -= velocidadeJogador;
+            }
+        }
+
+        if (e.keyCode == 39) {
+            if (jogadorPosicaoX < (canvas.width - barraLargura)) {
+                jogadorPosicaoX += velocidadeJogador;
+            }
+        }
+    }
+
+    setInterval(gameLoop, 30);
+    function gameLoop() {
+        //Desenha um fundo branco para limpar a tela
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        //Re-desenha o jogador para mostrar a sua nova posição - se tiver
+        context.fillRect(jogadorPosicaoX, canvas.height - barraAltura, barraLargura, barraAltura);
+
+        //Desenha a bola
+        context.beginPath();
+        context.arc(bolaPosX, bolaPosY, bolaDiametro, 0, Math.PI * 2, true);
+        context.fill();
+
+        if (bolaPosY <= canvas.height) {
+            bolaPosY += velocidadeBola;
+        }
+        else {
+            bolaPosX = Math.random() * 600;
+            bolaPosY = -10;
+            colisao = false;
+        }
+
+        if ((bolaPosX > jogadorPosicaoX && bolaPosX < jogadorPosicaoX + barraLargura) && bolaPosY >= canvas.height - barraAltura && colisao == false) {
+            pontosJogador++;
+            colisao = true;
+        }
+
+        context.font = "32pt Tahoma";
+        context.fillText(pontosJogador, canvas.width - 70, 50);
+
+    }
+
+   
+    
+});
+
+</script>
+
+
+
+
+<article>
+    <canvas id="canvas" width="600" height="480">
+        Navegador não suporta HTML5
+        <strong>Bola</strong>
+    </canvas>
+</article>
+

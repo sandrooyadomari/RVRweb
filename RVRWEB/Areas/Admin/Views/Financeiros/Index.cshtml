@@ -1,0 +1,58 @@
+﻿@model IEnumerable<RVRWEB.Models.Financeiro>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Dia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comprovante)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Valor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoPgt.Nome)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comprovante)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Valor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoPgt.Nome)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.FinanceiroID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.FinanceiroID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.FinanceiroID })
+        </td>
+    </tr>
+}
+
+</table>

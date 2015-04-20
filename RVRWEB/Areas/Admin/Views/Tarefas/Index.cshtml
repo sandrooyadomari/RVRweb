@@ -1,0 +1,40 @@
+﻿@model IEnumerable<RVRWEB.Models.Tarefa>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feito)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feito)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TarefaID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TarefaID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TarefaID })
+        </td>
+    </tr>
+}
+
+</table>

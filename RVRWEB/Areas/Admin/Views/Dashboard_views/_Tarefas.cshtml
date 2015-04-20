@@ -1,0 +1,42 @@
+﻿@*@model IEnumerable<RVRWEB.Models.Tarefa>*@
+@model RVRWEB.Models.AdminViewModel
+
+<article class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+    <div class="panel panel-escuro">
+        <div class="panel-heading">
+            @Html.ActionLink("Tarefas", "Index", "Tarefas")
+        </div>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TarefaObject.FirstOrDefault().Feito)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TarefaObject.FirstOrDefault().Titulo)
+                </th>
+                <th></th>
+            </tr>
+
+            @if (Model != null)
+            {
+                foreach (var item in Model.TarefaObject)
+                {
+                    <tr>
+                        <td class="col-xm-2 col-md-2 col-lg-2 col-sm-2">
+                            @Html.DisplayFor(modelItem => item.Feito)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Titulo)
+                        </td>
+                        <td class="col-xm-2 col-md-2 col-lg-2 col-sm-2">
+                            <a href="@Url.Action("Edit", "Tarefas", new { id = item.TarefaID })"><span class="glyphicon glyphicon-edit"></span></a>
+                            | <a href="@Url.Action("Delete", "Tarefas", new { id = item.TarefaID })"><span class="glyphicon glyphicon-trash"></span></a>
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</article>
+
+

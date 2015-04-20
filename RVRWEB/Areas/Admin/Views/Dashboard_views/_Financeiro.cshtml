@@ -1,0 +1,61 @@
+﻿@*@model IEnumerable<RVRWEB.Models.Financeiro>*@
+@model RVRWEB.Models.AdminViewModel
+@{var financeiromodel = Model.FinanceiroObject;}
+
+<article class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+    <div class="panel panel-escuro">
+        <div class="panel-heading">
+            @Html.ActionLink("Financeiro", "Index", "Financeiros")
+        </div>
+
+
+        
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FinanceiroObject.FirstOrDefault().Dia)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FinanceiroObject.FirstOrDefault().Comprovante)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FinanceiroObject.FirstOrDefault().Descricao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FinanceiroObject.FirstOrDefault().Valor)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.FinanceiroObject)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Dia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comprovante)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descricao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Valor)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.FinanceiroID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.FinanceiroID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.FinanceiroID })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+
+</article>

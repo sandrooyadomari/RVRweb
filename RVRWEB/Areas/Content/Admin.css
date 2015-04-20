@@ -1,0 +1,135 @@
+﻿/*#region  Default */
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+
+    font-size: 12px;
+    font-family: 'Open Sans',"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+/*#endregion  Default */
+
+
+/*#region  Menu Superior */
+.navbar {
+    border: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, .3);
+    box-shadow: 0px 0px 2px rgba(0,0,0,0.3);
+}
+/*#endregion  Menu Superior */
+
+
+/*#region  Menu Lateral */
+.adminaside {
+    width: 200px;
+    display: inline-block;
+    height: 100%;
+    box-sizing: border-box;
+    padding-top: 65px;
+    vertical-align: top;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    background: #2d353c;
+}
+aside .nav>li>a {
+    padding: 8px 20px;
+    /*line-height: 20px;*/
+    color: #a8acb1;
+}
+aside .nav>li>a, .nav-sub-items>li>a {
+    color: #a8acb1;
+    width: 100%;
+    border-radius: 0 !important;
+}
+.nav-sub-items
+{
+    padding: 0;
+    background-color: #1a2229;
+}
+.nav-sub-items>li>a {
+    text-decoration: none;
+    display: block;
+    padding: 8px 10px 8px 42px;
+}
+.nav-sub-items>li>a::before{
+    content:"-";
+    height: 34px;
+    width: 1px;
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    border-left: 2px solid #000;
+    margin-left: -17px;
+    line-height: 30px;
+    color: #000;
+
+}
+aside .nav>li>a:hover, .nav-sub-items>li>a:hover {
+    background-color: #000;
+    color: #fff;
+}
+.nav-sub-items>li>a:hover:before{
+    border-color: #fff;
+    color: #f1f1f1;
+    border-left: 1px solid;
+}
+.caret-menu {
+    position: absolute;
+    right: 0;
+    /*background-color: #1a2229;*/
+    padding: 8px 12px !important;
+    top:0;
+}
+.caret-menu:hover {
+    background-color: #000;
+}
+/*#endregion Menu Lateral */
+
+
+/*#region Body ADMIN */
+.bodyadmin {
+    padding-top: 65px;
+    padding-left: 205px;
+    vertical-align: top;
+    box-sizing: border-box;
+    width: 100%;
+    display: inline-block;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    background-color:#d9e0e7;
+    min-height: 100%;
+}
+.bodyadmin .panel {
+    border: 0 !important;
+}
+.panel-escuro .panel-heading{
+    background-color: #242a30;
+}
+.panel-escuro .panel-heading *{
+    color: #fff;
+}
+/*#endregion Body ADMIN */

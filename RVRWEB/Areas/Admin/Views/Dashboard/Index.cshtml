@@ -1,0 +1,10 @@
+﻿@model RVRWEB.Models.AdminViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@Html.Partial("~/Areas/Admin/Views/Dashboard_views/_Tarefas.cshtml")
+
+@Html.Partial("~/Areas/Admin/Views/Dashboard_views/_Financeiro.cshtml")

@@ -1,0 +1,335 @@
+﻿@*@{
+    ViewBag.Title = "JogoDaVelha";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style rel="stylesheet" >
+article {
+    text-align: center;
+    width: 450px;
+    margin: 30px auto auto auto; 
+    display: block;
+
+}
+
+.titulo {
+    margin: 20px;
+    display: inline-block;
+}
+
+.tabuleiro {
+    display: inline-block;
+    padding: 30px;
+    background-color: #ff6a00;
+    background-image: url(../../Images/jogo_da_velha_background.jpg);
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+    background-size: cover;
+    border-radius: 10px;
+}
+#turno{
+    cursor: move;
+}
+.quadrado, .quadrado_x, .quadrado_o {
+    display: inline-block;
+    height: 100px;
+    width: 100px;
+    border-radius: 5px;
+    margin: 5px;
+    box-sizing: border-box;
+    vertical-align: middle;
+    font-size: 70px;
+    background-color: #fff;
+    cursor: default;
+}
+.quadrado_x{
+    background-color: green !important;
+}
+.quadrado_o{
+    background-color: yellow !important;
+}
+.quadrado * {
+    margin: 0;
+    padding: 0;
+     
+}
+
+#a1, #a2,#a3,#b1,#b2,#b3,#c1,#c2,#c3 {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* Required to make elements draggable in old WebKit */
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;
+  
+}
+
+#x,#o {
+    cursor: move;
+}
+</style>
+
+<article>
+    <h2 class="titulo">Jogo da Velha Drag N' Drop</h2>
+    <div id="container" class="tabuleiro">
+        <span class="quadrado_x" id="turno" draggable="true" ondragstart="drag(event)">x</span>
+        <br />
+        <span class="quadrado" id="a1" ondrop="drop(event)" ondragover="allowDrop(event)"></span>
+        <span class="quadrado" id="a2" ondrop="drop(event)" ondragover="allowDrop(event)"></span>
+        <span class="quadrado" id="a3" ondrop="drop(event)" ondragover="allowDrop(event)"></span>
+        <br />
+        <span class="quadrado" id="b1" ondrop="drop(event)" ondragover="allowDrop(event)"></span>
+        <span class="quadrado" id="b2" ondrop="drop(event)" ondragover="allowDrop(event)"></span>
+        <span class="quadrado" id="b3" ondrop="drop(event)" ondragover="allowDrop(event)"></span>
+        <br />
+        <span class="quadrado" id="c1" ondrop="drop(event)" ondragover="allowDrop(event)"></span>
+        <span class="quadrado" id="c2" ondrop="drop(event)" ondragover="allowDrop(event)"></span>
+        <span class="quadrado" id="c3" ondrop="drop(event)" ondragover="allowDrop(event)"></span>
+    </div>
+</article>
+
+<script type="text/javascript">
+    var turno = document.getElementById("turno");
+
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("Text", ev.target.textContent);
+
+    }
+
+    function drop(ev) {
+        
+        var turno = document.getElementById("turno");
+        var dropclass;
+        var texto = ev.dataTransfer.getData("Text");
+        //ev.target.appendChild(document.getElementById(data).cloneNode(true));
+
+
+        if (event.target.textContent == "") {
+            dropclass = event.target.getElementById;
+            event.target.textContent = texto;
+
+            if (turno.textContent == "o") {
+                turno.textContent = "x";
+                event.target.className = "quadrado_o";
+                turno.className = "quadrado_x";
+            }
+            else {
+                turno.textContent = "o";
+                event.target.className = "quadrado_x";
+                turno.className = "quadrado_o";
+            };
+        };
+        
+        
+        testarvitoria();
+
+        ev.preventDefault();
+    }
+    
+    function clear() {
+        a1.textContent = ""; a1.className = "quadrado";
+        a2.textContent = ""; a2.className = "quadrado";
+        a3.textContent = ""; a3.className = "quadrado";
+
+        b1.textContent = ""; b1.className = "quadrado";
+        b2.textContent = ""; b2.className = "quadrado";
+        b3.textContent = ""; b3.className = "quadrado";
+
+        c1.textContent = ""; c1.className = "quadrado";
+        c2.textContent = ""; c2.className = "quadrado";
+        c3.textContent = ""; c3.className = "quadrado";
+    };
+
+    function testarvitoria() {
+        if (a1.textContent == "x" & a2.textContent == "x" & a3.textContent == "x"
+            || b1.textContent == "x" & b2.textContent == "x" & b3.textContent == "x"
+            || c1.textContent == "x" & c2.textContent == "x" & c3.textContent == "x"
+            || a1.textContent == "x" & b1.textContent == "x" & c1.textContent == "x"
+            || a2.textContent == "x" & b2.textContent == "x" & c2.textContent == "x"
+            || a3.textContent == "x" & b3.textContent == "x" & c3.textContent == "x"
+            || a1.textContent == "x" & b2.textContent == "x" & c3.textContent == "x"
+            || a3.textContent == "x" & b2.textContent == "x" & c1.textContent == "x") {
+            alert("Vitória do jogador \"X\" Ganhou");
+            clear();
+        }else if (a1.textContent == "o" & a2.textContent == "o" & a3.textContent == "o"
+            || b1.textContent == "o" & b2.textContent == "o" & b3.textContent == "o"
+            || c1.textContent == "o" & c2.textContent == "o" & c3.textContent == "o"
+            || a1.textContent == "o" & b1.textContent == "o" & c1.textContent == "o"
+            || a2.textContent == "o" & b2.textContent == "o" & c2.textContent == "o"
+            || a3.textContent == "o" & b3.textContent == "o" & c3.textContent == "o"
+            || a1.textContent == "o" & b2.textContent == "o" & c3.textContent == "o"
+            || a3.textContent == "o" & b2.textContent == "o" & c1.textContent == "o") {
+            alert("Vitória do jogador \"O\" Ganhou");
+            clear();
+        } else {
+            if (a1.textContent != "" & a2.textContent != "" & a3.textContent != "" & 
+                b1.textContent != "" & b2.textContent != "" & b3.textContent != "" & 
+                c1.textContent != "" & c2.textContent != "" & c3.textContent != "" ){
+                clear();
+            };
+        }
+    };
+
+
+
+</script>*@
+
+
+
+@{
+    ViewBag.Title = "JogoDaVelha";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style rel="stylesheet">
+    article {
+        text-align: center;
+        width: 450px;
+        margin: 30px auto auto auto;
+        display: block;
+    }
+
+    .titulo {
+        margin: 20px;
+        display: inline-block;
+    }
+
+    .tabuleiro {
+        display: inline-block;
+        padding: 30px;
+        background-color: #ff6a00;
+        /*background-image: url(../../Images/jogo_da_velha_background.jpg);*/
+        background-repeat: no-repeat;
+        background-position-x: center;
+        background-position-y: center;
+        background-size: cover;
+        border-radius: 10px;
+    }
+
+    #turno {
+        cursor: move;
+    }
+
+    .quadrado, .quadrado_x, .quadrado_o {
+        display: inline-block;
+        height: 100px;
+        width: 100px;
+        border-radius: 5px;
+        margin: 5px;
+        box-sizing: border-box;
+        vertical-align: middle;
+        font-size: 70px;
+        background-color: #fff;
+        cursor: default;
+    }
+
+    .quadrado_x {
+        background-color: green !important;
+    }
+
+    .quadrado_o {
+        background-color: yellow !important;
+    }
+
+    .quadrado * {
+        margin: 0;
+        padding: 0;
+    }
+
+    #a1, #a2, #a3, #b1, #b2, #b3, #c1, #c2, #c3 {
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+
+    #x, #o {
+        cursor: move;
+    }
+</style>
+
+<div id="ex1">
+    <h2 class="titulo">Jogo da Velha Drag N' Drop</h2>
+    <div id="container" class="tabuleiro">
+        <span class="quadrado_x" id="turno">x</span>
+        <br />
+        <span class="quadrado" id="a1"></span>
+        <span class="quadrado" id="a2"></span>
+        <span class="quadrado" id="a3"></span>
+        <br />
+        <span class="quadrado" id="b1"></span>
+        <span class="quadrado" id="b2"></span>
+        <span class="quadrado" id="b3"></span>
+        <br />
+        <span class="quadrado" id="c1"></span>
+        <span class="quadrado" id="c2"></span>
+        <span class="quadrado" id="c3"></span>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+        
+        $("#ex1 #turno").draggable({
+            containment: 'parent',
+            helper: 'clone'
+        });
+        $("#a1, #a2, #a3, #b1, #b2, #b3, #c1, #c2, #c3").droppable({
+            drop: function (event, ui) {
+                $(this)
+                  .addClass(ui.draggable.attr('class'))
+                .text(ui.draggable.text());
+                testarvitoria();
+            }
+        });
+    
+    function passarturno() {
+        if ($("#turno").text() == "x") {
+            $("#turno").text("o").switchClass("quadrado_x", "quadrado_o", 10, "linear");
+        } else {
+            $("#turno").text("x").switchClass("quadrado_o", "quadrado_x", 10, "linear");
+        };
+    };
+ 
+    function clear() {
+        $("#a1, #a2, #a3, #b1, #b2, #b3, #c1, #c2, #c3").text("").removeClass("quadrado_o quadrado_x");
+    };
+
+    function testarvitoria() {
+        if ($("#a1").text() == "x" & $("#a2").text() == "x" & $("#a3").text() == "x"
+                    || $("#b1").text() == "x" & $("#b2").text() == "x" & $("#b3").text() == "x"
+                    || $("#c1").text() == "x" & $("#c2").text() == "x" & $("#c3").text() == "x"
+                    || $("#a1").text() == "x" & $("#b1").text() == "x" & $("#c1").text() == "x"
+                    || $("#a2").text() == "x" & $("#b2").text() == "x" & $("#c2").text() == "x"
+                    || $("#a3").text() == "x" & $("#b3").text() == "x" & $("#c3").text() == "x"
+                    || $("#a1").text() == "x" & $("#b2").text() == "x" & $("#c3").text() == "x"
+                    || $("#c3").text() == "x" & $("#b2").text() == "x" & $("#c1").text() == "x") {
+            alert("Vitória do jogador \"X\"");
+            clear();
+        } else if ($("#a1").text() == "o" & $("#a2").text() == "o" & $("#a3").text() == "o"
+                    || $("#b1").text() == "o" & $("#b2").text() == "o" & $("#b3").text() == "o"
+                    || $("#c1").text() == "o" & $("#c2").text() == "o" & $("#c3").text() == "o"
+                    || $("#a1").text() == "o" & $("#b1").text() == "o" & $("#c1").text() == "o"
+                    || $("#a2").text() == "o" & $("#b2").text() == "o" & $("#c2").text() == "o"
+                    || $("#a3").text() == "o" & $("#b3").text() == "o" & $("#c3").text() == "o"
+                    || $("#a1").text() == "o" & $("#b2").text() == "o" & $("#c3").text() == "o"
+                    || $("#c3").text() == "o" & $("#b2").text() == "o" & $("#c1").text() == "o") {
+            alert("Vitória do jogador \"O\"");
+            clear();
+        } else {
+            if (a1.textContent != "" & a2.textContent != "" & a3.textContent != "" &
+                b1.textContent != "" & b2.textContent != "" & b3.textContent != "" &
+                c1.textContent != "" & c2.textContent != "" & c3.textContent != "") {
+                clear();
+            } else {
+                passarturno();
+            };
+        }
+    };
+});
+    
+</script>
